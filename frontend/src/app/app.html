@@ -10,5 +10,10 @@
     <p>{{ message }}</p>
     <p class="error-details">{{ error }}</p>
     <button (click)="ngOnInit()">Retry Connection</button>
+
+
   </div>
+        <h2>Upload Performance Video</h2>
+<input type="file" (change)="uploadVideo($event)">
+<p>Score: {{ score }}</p>
 </div>

@@ -6,11 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:5000/api/message'; // Adjust port if needed
+
+  private baseUrl = 'http://127.0.0.1:5000/api';
 
   constructor(private http: HttpClient) {}
 
   getMessage(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get(`${this.baseUrl}/message`);
   }
+
+  uploadVideo(data: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/upload`, data);
+  }
+
 }

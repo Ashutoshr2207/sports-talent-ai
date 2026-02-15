@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; 
 import { ApiService } from './services/api';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+    imports: [CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App implements OnInit {
-  message = "Loading...";
+  message = "Ashutosh";
   error: string | null = null;
 
   constructor(private api: ApiService) {}

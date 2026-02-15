@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Sports Talent AI</h1>
+  
+  <div *ngIf="!error">
+    <p>{{ message }}</p>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    <h2>Connection Error</h2>
+    <p>{{ message }}</p>
+    <p class="error-details">{{ error }}</p>
+    <button (click)="ngOnInit()">Retry Connection</button>
+  </div>
+</div>

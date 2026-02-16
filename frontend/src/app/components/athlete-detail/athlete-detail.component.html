@@ -1,0 +1,93 @@
+<div class="detail-container">
+  <button class="btn-back" routerLink="/athletes">← Back to Athletes</button>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading athlete details...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-error">
+    {{ error }}
+    <button class="btn-retry" (click)="loadAthleteData()">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && !error && athlete && analysis" class="detail-content">
+    <!-- Athlete Information Section -->
+    <div class="info-section">
+      <div class="section-header">
+        <h2>{{ athlete.name }}</h2>
+        <span class="sport-badge">{{ athlete.sport }}</span>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Age</span>
+          <span class="info-value">{{ athlete.age }} years</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Gender</span>
+          <span class="info-value">{{ athlete.gender }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Height</span>
+          <span class="info-value">{{ athlete.height }} cm</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Weight</span>
+          <span class="info-value">{{ athlete.weight }} kg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Analysis Section -->
+    <div class="analysis-section">
+      <h3>Performance Analysis</h3>
+      
+      <div class="rating-card">
+        <div class="rating-header">
+          <span class="rating-label">Performance Rating</span>
+          <span class="rating-badge" [ngClass]="getRatingClass(analysis.performance_rating)">
+            {{ analysis.performance_rating }}
+          </span>
+        </div>
+        <div class="average-score-display">
+          <span>Average Score:</span>
+          <span class="score-large">{{ analysis.average_score }}</span>
+        </div>
+      </div>
+
+      <div class="scores-grid">
+        <div class="score-card">
+          <div class="score-icon">⚡</div>
+          <div class="score-info">
+            <span class="score-label">Speed</span>
+            <span class="score-value">{{ analysis.speed_score }}</span>
+          </div>
+        </div>
+        <div class="score-card">
+          <div class="score-icon">💪</div>
+          <div class="score-info">
+            <span class="score-label">Strength</span>
+            <span class="score-value">{{ analysis.strength_score }}</span>
+          </div>
+        </div>
+        <div class="score-card">
+          <div class="score-icon">🏃</div>
+          <div class="score-info">
+            <span class="score-label">Endurance</span>
+            <span class="score-value">{{ analysis.endurance_score }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations Section -->
+    <div class="recommendations-section">
+      <h3>AI Recommendations</h3>
+      <ul class="recommendations-list">
+        <li *ngFor="let recommendation of analysis.recommendations">
+          {{ recommendation }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

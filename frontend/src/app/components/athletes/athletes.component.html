@@ -1,0 +1,72 @@
+<div class="athletes-container">
+  <div class="header-section">
+    <h2>Athletes Directory</h2>
+    <p class="subtitle">View all registered athletes and their performance metrics</p>
+    <button class="btn btn-primary" routerLink="/register">+ Add New Athlete</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading athletes...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-error">
+    {{ error }}
+    <button class="btn-retry" (click)="loadAthletes()">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && !error && athletes.length === 0" class="empty-state">
+    <p>No athletes registered yet.</p>
+    <a routerLink="/register" class="btn btn-primary">Register First Athlete</a>
+  </div>
+
+  <div *ngIf="!loading && !error && athletes.length > 0" class="athletes-grid">
+    <div *ngFor="let athlete of athletes" class="athlete-card" [routerLink]="['/athletes', athlete.id]">
+      <div class="card-header">
+        <h3>{{ athlete.name }}</h3>
+        <span class="sport-badge">{{ athlete.sport }}</span>
+      </div>
+      
+      <div class="card-body">
+        <div class="info-row">
+          <span class="label">Age:</span>
+          <span class="value">{{ athlete.age }} years</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Gender:</span>
+          <span class="value">{{ athlete.gender }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Height:</span>
+          <span class="value">{{ athlete.height }} cm</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Weight:</span>
+          <span class="value">{{ athlete.weight }} kg</span>
+        </div>
+      </div>
+
+      <div class="card-stats">
+        <div class="stat-item">
+          <span class="stat-label">Speed</span>
+          <span class="stat-value">{{ athlete.speed_score }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Strength</span>
+          <span class="stat-value">{{ athlete.strength_score }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Endurance</span>
+          <span class="stat-value">{{ athlete.endurance_score }}</span>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <div class="average-score">
+          <span>Average Score:</span>
+          <span class="score-value">{{ getAverageScore(athlete) }}</span>
+        </div>
+        <span class="view-details">View Details →</span>
+      </div>
+    </div>
+  </div>
+</div>

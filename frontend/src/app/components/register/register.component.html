@@ -1,0 +1,160 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Register New Athlete</h2>
+    <p class="subtitle">Fill in the athlete's information and performance metrics</p>
+
+    <form (ngSubmit)="onSubmit()" #athleteForm="ngForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            [(ngModel)]="athlete.name" 
+            required
+            placeholder="Enter athlete name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age *</label>
+          <input 
+            type="number" 
+            id="age" 
+            name="age" 
+            [(ngModel)]="athlete.age" 
+            required
+            min="1"
+            max="150"
+            placeholder="Enter age"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender *</label>
+          <select 
+            id="gender" 
+            name="gender" 
+            [(ngModel)]="athlete.gender" 
+            required
+          >
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sport">Sport *</label>
+          <input 
+            type="text" 
+            id="sport" 
+            name="sport" 
+            [(ngModel)]="athlete.sport" 
+            required
+            placeholder="e.g., Football, Basketball, Tennis"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="height">Height (cm) *</label>
+          <input 
+            type="number" 
+            id="height" 
+            name="height" 
+            [(ngModel)]="athlete.height" 
+            required
+            min="1"
+            step="0.1"
+            placeholder="Enter height in cm"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="weight">Weight (kg) *</label>
+          <input 
+            type="number" 
+            id="weight" 
+            name="weight" 
+            [(ngModel)]="athlete.weight" 
+            required
+            min="1"
+            step="0.1"
+            placeholder="Enter weight in kg"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="speed_score">Speed Score (0-100) *</label>
+          <input 
+            type="number" 
+            id="speed_score" 
+            name="speed_score" 
+            [(ngModel)]="athlete.speed_score" 
+            required
+            min="0"
+            max="100"
+            placeholder="0-100"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="strength_score">Strength Score (0-100) *</label>
+          <input 
+            type="number" 
+            id="strength_score" 
+            name="strength_score" 
+            [(ngModel)]="athlete.strength_score" 
+            required
+            min="0"
+            max="100"
+            placeholder="0-100"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="endurance_score">Endurance Score (0-100) *</label>
+          <input 
+            type="number" 
+            id="endurance_score" 
+            name="endurance_score" 
+            [(ngModel)]="athlete.endurance_score" 
+            required
+            min="0"
+            max="100"
+            placeholder="0-100"
+          >
+        </div>
+      </div>
+
+      <div *ngIf="error" class="alert alert-error">
+        {{ error }}
+      </div>
+
+      <div *ngIf="success" class="alert alert-success">
+        {{ success }}
+      </div>
+
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="btn btn-primary" 
+          [disabled]="isSubmitting || !athleteForm.valid"
+        >
+          <span *ngIf="!isSubmitting">Register Athlete</span>
+          <span *ngIf="isSubmitting">Registering...</span>
+        </button>
+        <button 
+          type="button" 
+          class="btn btn-secondary" 
+          (click)="athleteForm.resetForm()"
+          [disabled]="isSubmitting"
+        >
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
